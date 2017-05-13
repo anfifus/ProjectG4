@@ -1,0 +1,27 @@
+#colorti
+{
+ color:LightCoral;
+}
+body{
+ background-color: lightblue;
+}
+span{
+background-color: lightgreen;
+}
+.th{
+background-color: lightgreen;
+}
+.inputs{
+background-color: orange;
+}
+#ButtonFons
+{
+color:green;
+}
+#div1
+{
+ position:absolute;
+ left:550px;
+ top:200px;
+
+}
