@@ -20,7 +20,7 @@ public class LlistaEnemics : MonoBehaviour {
 		{
 			
 			string dir2 = @"Assets\Resources\FZeroRacers";//Li passem el directori amb totes les naus
-			//DirectoryInfo dirInfo = new DirectoryInfo (dir);
+
 			DirectoryInfo dirInfoMesh = new DirectoryInfo (dir2);//Creem el manipulador de directoris 
 
 			FileInfo[] filesMesh = dirInfoMesh.GetFiles("*.dae");//Aconseguim tots els fitxers que acabin amb extensio .dae
