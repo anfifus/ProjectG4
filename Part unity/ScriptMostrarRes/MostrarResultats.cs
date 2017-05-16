@@ -40,7 +40,7 @@ public class MostrarResultats : MonoBehaviour {
             
 
 				Puntuacions p = new Puntuacions(contingut[0], contingut[1], contingut[2], contingut[3]);//Les dades les introduim a una classe anomenada puntuacions
-               // if(p != null)
+               
                     ListP.Add(p);//Guardem la puntuacio a una llista
 				cont++;
             }
