@@ -29,7 +29,7 @@ public class LlistaEnemics : MonoBehaviour {
 			FileInfo mesh = filesMesh[randomNum];//Aconseguim el fitxer
 
 			string fileMesh = mesh.Name.Replace(".dae","");//Reemplacem l'extensio .dae i li posem un blanc 
-			GameObject prova = Instantiate( Resources.Load(@"FZeroRacers\"+fileMesh,typeof(GameObject))as GameObject);//Llavors del FZeroRacers carreguem el fitxer amb el mateix nom i el convertim a un gameobject         
+			GameObject prova = Instantiate( Resources.Load(@"Assets\Resources\FZeroRacers\"+fileMesh,typeof(GameObject))as GameObject);//Llavors del FZeroRacers carreguem el fitxer amb el mateix nom i el convertim a un gameobject         
             
 			prova.name = "La prova";//GameObject nomes estetic
             
