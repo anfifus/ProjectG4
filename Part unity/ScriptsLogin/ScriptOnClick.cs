@@ -47,12 +47,18 @@ public class ScriptOnClick : MonoBehaviour {
         yield return enviar;//Permet esperar i recollir un resultat
 		if (enviar.error != null)//En cas de ser null vol dir que no ha donat error
         {
-			error.text += " "+ enviar.error;
+            if (error.text != "")
+                error.text = error.text.Remove (0);
+            
+			    error.text = "Errors: "+ enviar.error;
         }
         else
         {
 			if (enviar.text == "NULL\n") {//Amb aquest resultat vol dir que no existeix el nom d'usuari o el password
-				error.text += " No s'ha trobat cap usuari";
+                if(error.text != "")
+                   error.text = error.text.Remove(0);
+                
+                   error.text += "Errors: No s'ha trobat cap usuari";
 			} 
 			else {
 					id = int.Parse (enviar.text);//Converteix el string rebut per un enter
