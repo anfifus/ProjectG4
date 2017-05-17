@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using AssemblyCSharp;
-
+using UnityEngine.SceneManagement;
 
 public class MostrarResultats : MonoBehaviour {
     public Text port;
@@ -69,5 +69,15 @@ public class MostrarResultats : MonoBehaviour {
 			GUI.Label (new Rect (384+100, cont * 32, 128, 32), p.getResultatMarcador(),style);
 			cont++;
 		}
+		GUIStyle styleButton = new GUIStyle ();
+		style.normal.textColor = Color.cyan;
+		if (GUI.Button (new Rect (10, cont * 32, 128, 32), "Sortir", styleButton)) {
+			sortir ();
+		}
+
+	}
+	void sortir()
+	{
+		SceneManager.LoadScene ("Menu");
 	}
 }

@@ -11,39 +11,29 @@ public class LlistaEnemics : MonoBehaviour {
 	float posX = 0f;
 	float posZ = 0f;
 	List<GameObject>ListEnemy = new List<GameObject>();
-    public GameObject enemic;
+    public GameObject puntOriEne;
 	void Awake()
 	{
 		
-		int cont = 0;//Iniciador de enemics creats
-		do 
-		{
-			
-			string dir2 = @"Assets\Resources\FZeroRacers";//Li passem el directori amb totes les naus
+	
+			string dir2 ="Prefabs/FZeroRacers";//Li passem el directori amb totes les naus
+		AssetBundle bundle = new AssetBundle();
+		List<GameObject> objs = new List<GameObject>();
+		foreach (GameObject o in Resources.LoadAll(dir2,typeof(GameObject))) {
+			objs.Add (o);
+		}
+		int randomNum = Random.Range(0,objs.Count-1);//Agafem un numero que sigui -1 al total de fitxers
+		GameObject NauEnemiga = Instantiate(objs.ToArray().GetValue(randomNum)as GameObject);
+		NauEnemiga.name = "Nau enemiga";
 
-			DirectoryInfo dirInfoMesh = new DirectoryInfo (dir2);//Creem el manipulador de directoris 
+		puntOriEne.AddComponent<MovimentNau>().personalPos(posX, posZ,puntOriEne.transform);//GameObject el qual fara el moviment
+		NauEnemiga.transform.parent = puntOriEne.transform;//Li passem el transform del punt origen de l'enemic
+		NauEnemiga.transform.position = puntOriEne.transform.position;//Li passem la posicio del punt origen de l'enemic
+		NauEnemiga.transform.localRotation = puntOriEne.transform.rotation;//Li passem la rotacio local del punt origen de l'enemic
+		NauEnemiga.transform.localScale = new Vector3(1, 1, 1);//Escala tenint com a referencia el gameobject pare
 
-			FileInfo[] filesMesh = dirInfoMesh.GetFiles("*.dae");//Aconseguim tots els fitxers que acabin amb extensio .dae
-			int randomNum = Random.Range(0,filesMesh.Length-1);//Agafem un numero que sigui -1 al total de fitxers
-
-			FileInfo mesh = filesMesh[randomNum];//Aconseguim el fitxer
-
-			string fileMesh = mesh.Name.Replace(".dae","");//Reemplacem l'extensio .dae i li posem un blanc 
-			GameObject prova = Instantiate( Resources.Load(@"Assets\Resources\FZeroRacers\"+fileMesh,typeof(GameObject))as GameObject);//Llavors del FZeroRacers carreguem el fitxer amb el mateix nom i el convertim a un gameobject         
-            
-			prova.name = "La prova";//GameObject nomes estetic
-            
-            prova.transform.parent = enemic.transform;
-            enemic.AddComponent<MovimentNau>().personalPos(posX, posZ,enemic.transform);//GameObject el qual fara el moviment
-            prova.transform.position = enemic.transform.position;
-            prova.transform.localRotation = enemic.transform.rotation;
-            prova.transform.localScale = new Vector3(1, 1, 1);//Escala tenint com a referencia el gameobject pare
-            
-            ListEnemy.Add(prova);
-			cont++;
-            
-        }
-		while(cont < numEnemy);
+		ListEnemy.Add(NauEnemiga);
+				
        
     }
 
