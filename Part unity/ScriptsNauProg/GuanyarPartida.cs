@@ -63,7 +63,6 @@ public class GuanyarPartida : MonoBehaviour {
 				lap++;
 			}
 		}
-		//pasarInfo ();
 	}
 
     private void provaPHP(TimeSpan tempsTrigat)
@@ -82,15 +81,8 @@ public class GuanyarPartida : MonoBehaviour {
         form.AddField("Minuts", min);//Enviem els minuts tardats
         form.AddField("Segons", sec);//Enviem els segons tardats
         var PasInfo = new WWW(url, form);//Li passem els valors al fitxer php que volem utilitzar
-        /*yield return PasInfo;
-        if(PasInfo.error == null)
-        {
-            Debug.LogError(PasInfo.text);
-        }
-        else
-        {
-            Debug.LogError(PasInfo.error);
-        }*/
+   
+		Destroy (guardaId);//Destruim el gameobject guardador per si volem fer una altre partida
         SceneManager.LoadScene("Puntuacio");//Carrega la seguent escena
     }
 }

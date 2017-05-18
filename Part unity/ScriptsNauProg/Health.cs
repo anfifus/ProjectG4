@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour { 
 
@@ -21,7 +22,7 @@ public class Health : MonoBehaviour {
     {
 		if(theCollision.gameObject == enemic)//Si hi ha col·lisio del jugador a l'enemic
         {
-			if(cur_Health >= 0)//Si la vida no ha arribat a 0 o es igual a 0
+			if(cur_Health > 0)//Si la vida no ha arribat a 0 o es igual a 0
 				decreaseHealth();//Metode disminueix vida
         }
         
@@ -58,7 +59,7 @@ public class Health : MonoBehaviour {
         if (myHealth <= 0)
         {
             jugador.AddComponent<Detonator>().Explode();//Obliga a crear un efecte d'explosio
-            
+			SceneManager.LoadScene ("Menu");
         }
         
     }
