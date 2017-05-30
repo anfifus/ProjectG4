@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Llengues>
+	<Llengua>
+		<nom>Catala</nom>
+		<boto1>Jugar</boto1>
+		<boto2>Opcions</boto2>
+		<boto3>Sortir</boto3>
+	</Llengua>
+	<Llengua>
+		<nom>Castella</nom>
+		<boto1>Jugar</boto1>
+		<boto2>Opciones</boto2>
+		<boto3>Salir</boto3>
+	</Llengua>
+	<Llengua>
+		<nom>Angles</nom>
+		<boto1>Play</boto1>
+		<boto2>Options</boto2>
+		<boto3>Exit</boto3>
+	</Llengua>
+</Llengues>
