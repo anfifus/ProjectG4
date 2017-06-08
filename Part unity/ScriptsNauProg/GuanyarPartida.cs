@@ -15,7 +15,8 @@ public class GuanyarPartida : MonoBehaviour {
 	private DateTime timeIni;
 	private DateTime timeFin;
 	private int lap = 1;
-    private string url = "http://anfifus.000webhostapp.com/ProjectUnity/insertIntoBDVictories.php";
+	private string url = "http://anfifus.000webhostapp.com/ProjectUnity/insertIntoBDVictories.php";
+	//private string url = "https://anfifus.000webhostapp.com/?dir=ProjectUnity/insertIntoBDVictories.php";
     //private string url = "http://anfifus.260mb.net/ProjectUnity/insertIntoBDVictories.php";//sql202.260mb.net
     [SerializeField]private int totalLap = 1;
     //[SerializeField]private GameObject guardar;
@@ -58,10 +59,11 @@ public class GuanyarPartida : MonoBehaviour {
 							timeFin = DateTime.Now;//Aconsegueix l'ultim temps
 							TimeSpan tempsTrigat = timeFin.TimeOfDay - timeIni.TimeOfDay;//Restem el temps final - l'inicial i sabrem la duracio
 														
-                           provaPHP(tempsTrigat);//Metode on s'enviara el temps trigat                            
-                }
+                           provaPHP(tempsTrigat);//Metode on s'enviara el temps trigat  
+					      
+                      }
 				lap++;
-			}
+			 }
 		}
 	}
 
@@ -70,19 +72,31 @@ public class GuanyarPartida : MonoBehaviour {
         int hores = tempsTrigat.Hours;//Aconseguim les hores del temps trigat
 		int min = tempsTrigat.Minutes;//Aconseguim les minuts del temps trigat
 		int sec = tempsTrigat.Seconds;//Aconseguim les segons del temps trigat
-        Debug.LogError("Funciona: " + hores + "," + min + "," + sec);
 
-        var form = new WWWForm();//Inciem un wwwform
+		WWWForm form = new WWWForm();//Inciem un wwwform
         var guardaId = GameObject.Find("Guardador");//Trobem el gameobject guardador que contenia la id
         int id = guardaId.GetComponent<GuardaVariables>().getId();//Aconseguim la id de l'usuari
-		print("La id final es: "+id);
         form.AddField("id", id);//Enviem la id
-        form.AddField("Hores", hores);//Enviem les hores tardades
-        form.AddField("Minuts", min);//Enviem els minuts tardats
-        form.AddField("Segons", sec);//Enviem els segons tardats
-        var PasInfo = new WWW(url, form);//Li passem els valors al fitxer php que volem utilitzar
-   
-		Destroy (guardaId);//Destruim el gameobject guardador per si volem fer una altre partida
-        SceneManager.LoadScene("Puntuacio");//Carrega la seguent escena
+        form.AddField("hores", hores);//Enviem les hores tardades
+        form.AddField("minuts", min);//Enviem els minuts tardats
+        form.AddField("segons", sec);//Enviem els segons tardats
+		Debug.LogError(sec);
+		WWW PasInfo = new WWW(url, form);//Li passem els valors al fitxer php que volem utilitzar
+
+		StartCoroutine(Prova(PasInfo,guardaId));
+
+        
     }
+		
+	IEnumerator Prova (WWW PasInfo,GameObject guardaId)
+	{
+		//WWW returnInfo = new WWW (url);
+		yield return PasInfo;
+		if (PasInfo.error == null) {
+			var info = PasInfo.text;
+			Debug.LogError (info);
+		}
+		Destroy (guardaId);//Destruim el gameobject guardador per si volem fer una altre partida
+		SceneManager.LoadScene("Puntuacio");//Carrega la seguent escena
+	}
 }
