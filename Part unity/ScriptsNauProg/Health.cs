@@ -58,8 +58,8 @@ public class Health : MonoBehaviour {
         healthBar.transform.localScale = new Vector3(myHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);//Nomes es modifica la barra de vida desplaçant cap a l'esquerra pertant el valor rebut per la funcio sera per modificar l'escalat de les x
         if (myHealth <= 0)
         {
-            jugador.AddComponent<Detonator>().Explode();//Obliga a crear un efecte d'explosio
-			SceneManager.LoadScene ("Menu");
+            //jugador.AddComponent<Detonator>().Explode();//Obliga a crear un efecte d'explosio
+			Application.Quit();
         }
         
     }
